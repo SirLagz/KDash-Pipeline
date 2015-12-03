@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-def trim_sn_data(jsondata,fields):
+def trim_sn_data(jsondata,fields,id='_id'):
     import json
     field = set(fields)
 
@@ -13,6 +13,7 @@ def trim_sn_data(jsondata,fields):
         for key in record:
             if key in field:
                 tr[key] = record[key]
+        tr[id] = tr['sys_id']
         newdata[tr['sys_id']] = tr
 
     return newdata
