@@ -13,7 +13,7 @@ parser.add_argument("--time","-d",help="Time period for Query to be run against 
 
 args = parser.parse_args()
 
-data = mod_getsndata.get_sn_table_data(args.instance, args.user, args.password, args.table, args.format, args.query, args.time)
+data = mod_getsndata.get_sn_table_data(args.instance, args.user, args.password, args.table, args.query, args.time, args.format)
 
 print(data)
 

@@ -1,4 +1,4 @@
-def get_sn_table_data(instance, user, password, table, format, querytype, querytime ):
+def get_sn_table_data(instance, user, password, table, querytype = "updated", querytime = "LastHour", format = "JSONv2"):
     import requests
 
     types = {
@@ -11,6 +11,7 @@ def get_sn_table_data(instance, user, password, table, format, querytype, queryt
     }
 
     queries = {
+        "LastHour": "Last%20hour%40javascript%3Ags.hoursAgoStart(1)%40javascript%3Ags.hoursAgoEnd(1)",
         "ThisMonth": "This%20month%40javascript%3Ags.beginningOfThisMonth()%40javascript%3Ags.endOfThisMonth()",
         "LastMonth": "Last%20month%40javascript%3Ags.beginningOfLastMonth()%40javascript%3Ags.endOfLastMonth()",
         "Last6Months": "Last%206%20months%40javascript%3Ags.monthsAgoStart(6)%40javascript%3Ags.endOfThisMonth()",

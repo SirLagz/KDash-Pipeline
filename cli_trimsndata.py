@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 fields = ["assigned_to","assignment_group","category","contact_type","description","number","opened_at","opened_by","priority","short_description","state","sys_class_name","sys_created_on","sys_id","sys_updated_on","u_req_priority","u_requestor","u_affected_contact","u_business_service","u_resolution_code","u_resolution_reason","u_sla_progress"]
 
-data = mod_getsndata.get_sn_table_data(args.instance, args.user, args.password, args.table, args.format, args.query, args.time)
+data = mod_getsndata.get_sn_table_data(args.instance, args.user, args.password, args.table, args.query, args.time, args.format)
 
 newdata = mod_trimsndata.trim_sn_data(data,fields)
 
