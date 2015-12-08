@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import mod_trimsndata
 import mod_getsndata
 
@@ -19,4 +19,4 @@ data = mod_getsndata.get_sn_table_data(args.instance, args.user, args.password, 
 
 newdata = mod_trimsndata.trim_sn_data(data,fields)
 
-print newdata
+print(newdata)

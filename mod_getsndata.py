@@ -24,7 +24,7 @@ def get_sn_table_data(instance, user, password, table, format, querytype, queryt
 
 
     urlBase = "https://"+instance+".service-now.com"
-    urlTable = urlBase+"/"+table+".do?"+format
+    urlTable = urlBase+"/"+table+".do?"+format+"&displayvalue=true"
     urlQuery = urlTable+"&"+query
 
     jsonData = requests.get(urlQuery,auth=(user,password))

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import argparse
 import mod_getsndata
 
@@ -15,5 +15,5 @@ args = parser.parse_args()
 
 data = mod_getsndata.get_sn_table_data(args.instance, args.user, args.password, args.table, args.format, args.query, args.time)
 
-print data
+print(data)
 

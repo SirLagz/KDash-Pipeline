@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import argparse
 import mod_trimsndata
 import mod_getsndata
@@ -24,4 +24,4 @@ records = mod_trimsndata.trim_sn_data(data,fields)
 
 for record in records:
     mongoid = mod_loadsndata.update_mongo_collection(args.database,args.table,records[record])
-    print "Upserted "+str(mongoid)
+    print("Upserted "+str(mongoid))
