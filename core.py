@@ -22,7 +22,7 @@ mongorunning = 0
 
 while mongorunning == 0:
     print("Checking for mongo connection")
-    mongorunning = mod_loadsndata.check_connection(database,table)
+    mongorunning = mod_loadsndata.check_connection()
     if mongorunning == 0:
         print("Mongo not running. Trying again in 120 seconds")
         time.sleep(120)
