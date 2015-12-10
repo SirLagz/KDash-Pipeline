@@ -28,7 +28,7 @@ for record in records:
     print("Upserted "+str(mongoid))
 
 
-while true:
+while True:
     time.sleep(1800)
     data = mod_getsndata.get_sn_table_data(instance, username, password, table)
     records = mod_trimsndata.trim_sn_data(data,fields)
