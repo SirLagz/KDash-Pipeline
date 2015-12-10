@@ -42,5 +42,6 @@ while True:
     time.sleep(1800)
     data = mod_getsndata.get_sn_table_data(instance, username, password, table)
     records = mod_trimsndata.trim_sn_data(data,fields)
-    mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
-    print("Upserted "+str(mongoid))
+    for record in records:
+        mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
+        print("Upserted "+str(mongoid))
