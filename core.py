@@ -24,9 +24,10 @@ while mongorunning == 0:
     print("Checking for mongo connection")
     mongorunning = mod_loadsndata.check_connection(database,table)
     if mongorunning == 0:
-        print("Mongo not running. Trying again")
+        print("Mongo not running. Trying again in 120 seconds")
+        sleep(120)
     else:
-        print("Mongo is running now")
+        print("Mongo is running. Continuing")
 
 data = mod_getsndata.get_sn_table_data(instance, username, password, table, query, time)
 
