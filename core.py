@@ -21,7 +21,12 @@ test = subprocess.Popen(["/etc/init.d/mongodb","start"])
 mongorunning = 0
 
 while mongorunning == 0:
+    print("Checking for mongo connection")
     mongorunning = mod_loadsndata.check_connection(database,table)
+    if mongorunning == 0:
+        print("Mongo not running. Trying again")
+    else:
+        print("Mongo is running now")
 
 data = mod_getsndata.get_sn_table_data(instance, username, password, table, query, time)
 
