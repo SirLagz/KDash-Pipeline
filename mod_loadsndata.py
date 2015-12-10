@@ -9,3 +9,13 @@ def update_mongo_collection(database,collection,post,id='_id',server='localhost'
     id = collection.update({id:post[id]}, post, upsert=True)
 
     return id
+
+def check_connection(server='localhost',port=27017):
+    from pymongo import MongoClient
+
+    try:
+        client = MongoClient(server,port)
+        client.server_info()
+        return 1
+    except:
+        return 0
