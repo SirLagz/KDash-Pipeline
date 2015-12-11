@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-def update_mongo_collection(database,collection,post,id='_id',server='localhost',port=27017):
+def update_mongo_collection(client,database,collection,post,id='_id',server='localhost',port=27017):
     from pymongo import MongoClient
 
-    client = MongoClient(server,port)
+#    client = MongoClient(server,port)
     database = client[database]
     collection = database[collection]
 
@@ -25,3 +25,9 @@ def check_connection(server='localhost',port=27017):
         return 1
     except:
         return 0
+
+
+def get_connection(server='localhost',port=27017):
+    from pymongo import MongoClient
+    client = MongoClient(server,port)
+    return client

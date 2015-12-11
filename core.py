@@ -29,6 +29,7 @@ while mongorunning == 0:
         print("Mongo not running. Trying again in 120 seconds")
         time.sleep(120)
     else:
+        conn = mod_loadsndata.get_connection()
         print("Mongo is running. Continuing")
 
 for table in tables:
@@ -36,7 +37,7 @@ for table in tables:
     records = mod_trimsndata.trim_sn_data(data,fields)
 
     for record in records:
-        mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
+        mongoid = mod_loadsndata.update_mongo_collection(conn,database,table,records[record])
         print("Table:"+table+":Upserted "+str(mongoid))
 
 
@@ -47,5 +48,5 @@ while True:
         data = mod_getsndata.get_sn_table_data(instance, username, password, table)
         records = mod_trimsndata.trim_sn_data(data,fields)
         for record in records:
-            mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
+            mongoid = mod_loadsndata.update_mongo_collection(conn,database,table,records[record])
             print("Table:"+table+":Upserted "+str(mongoid))
