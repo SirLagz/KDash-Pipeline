@@ -6,9 +6,15 @@ def update_mongo_collection(database,collection,post,id='_id',server='localhost'
     client = MongoClient(server,port)
     database = client[database]
     collection = database[collection]
-    id = collection.update({id:post[id]}, post, upsert=True)
 
-    return id
+    print("Upserting "+post[id])
+
+    try:
+        id = collection.update({id:post[id]}, post, upsert=True)
+        return id
+    except err:
+        return err
+
 
 def check_connection(server='localhost',port=27017):
     from pymongo import MongoClient

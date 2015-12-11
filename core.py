@@ -39,7 +39,8 @@ for record in records:
 
 
 while True:
-    time.sleep(1800)
+    print("Waiting 300 seconds to get next update")
+    time.sleep(300)
     data = mod_getsndata.get_sn_table_data(instance, username, password, table)
     records = mod_trimsndata.trim_sn_data(data,fields)
     for record in records:
