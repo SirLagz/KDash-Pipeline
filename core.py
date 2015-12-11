@@ -9,10 +9,12 @@ import subprocess
 instance = os.environ['SNINSTANCE']
 username = os.environ['SNUSERNAME']
 password = os.environ['SNPASSWORD']
-table = os.environ['SNTABLE']
+tables = os.environ['SNTABLE']
 query = "updated"
 timeframe = "Last6Months"
 database = "KDash"
+
+tables = tables.split(',')
 
 fields = ["assigned_to","assignment_group","category","contact_type","description","number","opened_at","opened_by","priority","short_description","state","sys_class_name","sys_created_on","sys_id","sys_updated_on","u_req_priority","u_requestor","u_affected_contact","u_business_service","u_resolution_code","u_resolution_reason","u_sla_progress","u_resolved","u_completed"]
 
@@ -29,20 +31,21 @@ while mongorunning == 0:
     else:
         print("Mongo is running. Continuing")
 
-data = mod_getsndata.get_sn_table_data(instance, username, password, table, query, timeframe)
+for table in tables:
+    data = mod_getsndata.get_sn_table_data(instance, username, password, table, query, timeframe)
+    records = mod_trimsndata.trim_sn_data(data,fields)
 
-records = mod_trimsndata.trim_sn_data(data,fields)
-
-for record in records:
-    mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
-    print("Upserted "+str(mongoid))
+    for record in records:
+        mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
+        print("Table:"+table+":Upserted "+str(mongoid))
 
 
 while True:
-    print("Waiting 300 seconds to get next update")
-    time.sleep(300)
-    data = mod_getsndata.get_sn_table_data(instance, username, password, table)
-    records = mod_trimsndata.trim_sn_data(data,fields)
-    for record in records:
-        mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
-        print("Upserted "+str(mongoid))
+    print("Waiting 10 minutes to get next update")
+    time.sleep(600)
+    for table in tables:
+        data = mod_getsndata.get_sn_table_data(instance, username, password, table)
+        records = mod_trimsndata.trim_sn_data(data,fields)
+        for record in records:
+            mongoid = mod_loadsndata.update_mongo_collection(database,table,records[record])
+            print("Table:"+table+":Upserted "+str(mongoid))
