@@ -33,6 +33,7 @@ while mongorunning == 0:
         print("Mongo is running. Continuing")
 
 for table in tables:
+    print("Getting data for "+table+" for "+timeframe)
     data = mod_getsndata.get_sn_table_data(instance, username, password, table, query, timeframe)
     records = mod_trimsndata.trim_sn_data(data,fields)
 
