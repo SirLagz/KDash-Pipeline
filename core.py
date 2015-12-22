@@ -38,7 +38,7 @@ for table in tables:
     records = mod_trimsndata.trim_sn_data(data,fields)
 
     for record in records:
-        mongoid = mod_loadsndata.update_mongo_collection(conn,database,table,records[record])
+        mongoid = mod_loadsndata.update_mongo_collection(conn,database,"tickets",records[record])
         print("Table:"+table+":Upserted "+str(mongoid))
 
 
@@ -49,5 +49,5 @@ while True:
         data = mod_getsndata.get_sn_table_data(instance, username, password, table)
         records = mod_trimsndata.trim_sn_data(data,fields)
         for record in records:
-            mongoid = mod_loadsndata.update_mongo_collection(conn,database,table,records[record])
+            mongoid = mod_loadsndata.update_mongo_collection(conn,database,"tickets",records[record])
             print("Table:"+table+":Upserted "+str(mongoid))
